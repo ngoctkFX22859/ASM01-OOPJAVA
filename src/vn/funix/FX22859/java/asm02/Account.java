@@ -3,36 +3,37 @@ package vn.funix.FX22859.java.asm02;
 import java.text.DecimalFormat;
 
 public class Account {
-    private String accountNumber;
-    private double balance;
 
-    public Account(String accountNumber, double balance) {
-        this.accountNumber = accountNumber;
-        this.balance = balance;
-    }
+  private String accountNumber;
+  private double balance;
 
-    public String getAccountNumber() {
-        return accountNumber;
-    }
+  public Account(String accountNumber, double balance) {
+    this.accountNumber = accountNumber;
+    this.balance = balance;
+  }
 
-    public void setAccountNumber(String accountNumber) {
-        this.accountNumber = accountNumber;
-    }
+  public String getAccountNumber() {
+    return accountNumber;
+  }
 
-    public double getBalance() {
-        return balance;
-    }
+  public void setAccountNumber(String accountNumber) {
+    this.accountNumber = accountNumber;
+  }
 
-    public void setBalance(double balance) {
-        this.balance = balance;
-    }
+  public double getBalance() {
+    return balance;
+  }
 
-    public boolean isPremium() {
-        return getBalance() > 10000000;
-    }
+  public void setBalance(double balance) {
+    this.balance = balance;
+  }
 
-    public String toString() {
-        DecimalFormat decimalFormat = new DecimalFormat("#,##0đ");
-        return " " + accountNumber + "               " + decimalFormat.format(balance);
-    }
+  public boolean isPremium() {
+    return getBalance() >= 10000000;
+  }
+
+  public String toString() {
+    DecimalFormat decimalFormat = new DecimalFormat("#,##0đ");
+    return " " + accountNumber + "               " + decimalFormat.format(balance);
+  }
 }
