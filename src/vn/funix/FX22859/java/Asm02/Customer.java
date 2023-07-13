@@ -14,6 +14,10 @@ public class Customer extends User {
         accounts = new ArrayList<Account>();
     }
 
+    public List<Account> getAccount() {
+        return accounts;
+    }
+
     public boolean isPremium() {
         for (Account account : accounts) {
             if (account.isPremium())

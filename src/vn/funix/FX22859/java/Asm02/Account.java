@@ -34,6 +34,6 @@ public class Account {
 
     public String toString() {
         DecimalFormat decimalFormat = new DecimalFormat("#,##0đ");
-        return " " + accountNumber + "                  " + decimalFormat.format(balance);
+        return " " + accountNumber + "               " + decimalFormat.format(balance);
     }
 }

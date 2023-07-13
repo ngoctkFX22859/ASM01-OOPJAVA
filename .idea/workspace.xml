@@ -4,22 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e9c20f33-f577-4a93-b2d2-5feff5285d9b" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/vn/funix/FX22859/java/Asm03/Asm3.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/vn/funix/FX22859/java/Asm03/models/DigitalBank.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/vn/funix/FX22859/java/Asm03/models/DigitalCustomer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/vn/funix/FX22859/java/Asm03/models/LoanAccount.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/vn/funix/FX22859/java/Asm03/models/SavingsAccount.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/vn/funix/FX22859/java/Asm03/models/Transaction.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/vn/funix/FX22859/java/asm01/asm1.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/vn/funix/FX22859/java/Asm01/Asm1.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/vn/funix/FX22859/java/asm02/Account.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/vn/funix/FX22859/java/Asm02/Account.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/vn/funix/FX22859/java/asm02/Bank.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/vn/funix/FX22859/java/Asm02/Bank.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/vn/funix/FX22859/java/asm02/Customer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/vn/funix/FX22859/java/Asm02/Customer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/vn/funix/FX22859/java/asm02/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/vn/funix/FX22859/java/Asm02/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/vn/funix/FX22859/java/asm02/asm2.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/vn/funix/FX22859/java/Asm02/Asm2.java" afterDir="false" />
-    </list>
+    <list default="true" id="e9c20f33-f577-4a93-b2d2-5feff5285d9b" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -173,6 +158,7 @@
       <workItem from="1688536014002" duration="818000" />
       <workItem from="1688616842312" duration="1545000" />
       <workItem from="1689156919264" duration="4639000" />
+      <workItem from="1689219538878" duration="991000" />
     </task>
     <servers />
   </component>
