@@ -1,7 +1,6 @@
-package vn.funix.FX22859.java.asm02;
+package vn.funix.FX22859.java.Asm02;
 
 import java.util.HashMap;
-import java.util.regex.Pattern;
 
 
 public class User {

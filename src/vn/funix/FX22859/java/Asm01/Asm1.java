@@ -1,10 +1,10 @@
-package vn.funix.FX22859.java.asm01;
+package vn.funix.FX22859.java.Asm01;
 
 import java.util.Random;
 import java.util.Scanner;
 import java.util.HashMap;
 
-public class asm1 {
+public class Asm1 {
 
     static Scanner sc;
     static HashMap<String, String> danhSachDonViMap = new HashMap<>();

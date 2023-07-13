@@ -1,4 +1,4 @@
-package vn.funix.FX22859.java.asm02;
+package vn.funix.FX22859.java.Asm02;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -12,10 +12,6 @@ public class Customer extends User {
     public Customer(String name, String customerID) {
         super(name, customerID);
         accounts = new ArrayList<Account>();
-    }
-
-    public List<Account> getAccount() {
-        return accounts;
     }
 
     public boolean isPremium() {
