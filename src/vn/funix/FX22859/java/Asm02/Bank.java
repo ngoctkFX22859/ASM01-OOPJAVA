@@ -6,8 +6,8 @@ import java.util.Objects;
 
 public class Bank {
 
-    private String ID;
-    private List<Customer> customers;
+    protected String ID;
+    protected List<Customer> customers;
 
     public Bank() {
         customers = new ArrayList<Customer>();
@@ -21,8 +21,9 @@ public class Bank {
         return customers;
     }
 
-    public void addCustomer(Customer newCustomer) {
-        customers.add(newCustomer);
+    public void addCustomer(String customerName, String customerId) {
+        Customer customer = new Customer(customerName, customerId);
+        customers.add(customer);
     }
 
     public boolean isCustomerExisted(String customerId) {
@@ -32,5 +33,14 @@ public class Bank {
             }
         }
         return false;
+    }
+
+    public void addAccount(String customerId, Account account) {
+        for (Customer customer : customers) {
+            if (customer.getCustomerID().equals(customerId)) {
+                customer.addAccount(account);
+                return;
+            }
+        }
     }
 }

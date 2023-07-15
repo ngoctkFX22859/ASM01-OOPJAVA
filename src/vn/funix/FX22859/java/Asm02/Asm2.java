@@ -93,8 +93,7 @@ public class Asm2 {
             customerId = sc.next();
             isExisted = bank.isCustomerExisted(customerId);
         }
-        Customer customer = new Customer(name, customerId);
-        bank.addCustomer(customer);
+        bank.addCustomer(name, customerId);
         System.out.println("Đã thêm khách hàng " + customerId + " vào danh sách.");
     }
 

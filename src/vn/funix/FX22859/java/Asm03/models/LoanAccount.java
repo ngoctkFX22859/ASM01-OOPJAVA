@@ -1,4 +1,9 @@
 package vn.funix.FX22859.java.Asm03.models;
 
-public class LoanAccount {
+import vn.funix.FX22859.java.Asm02.Account;
+
+public class LoanAccount extends Account {
+    public LoanAccount(String accountNumber, double balance) {
+        super(accountNumber, balance);
+    }
 }

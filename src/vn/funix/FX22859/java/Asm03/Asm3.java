@@ -2,13 +2,15 @@ package vn.funix.FX22859.java.Asm03;
 
 import vn.funix.FX22859.java.Asm02.Customer;
 import vn.funix.FX22859.java.Asm03.models.DigitalBank;
+import vn.funix.FX22859.java.Asm03.models.LoanAccount;
+import vn.funix.FX22859.java.Asm03.models.SavingsAccount;
 
 import java.util.Scanner;
 
 public class Asm3 {
     private static final Integer EXIT_COMMAND_CODE = 0;
     private static final Integer EXIT_ERROR_CODE = -1;
-    private static final Scanner scanner = new Scanner(System.in);
+    public static final Scanner scanner = new Scanner(System.in);
     private static final DigitalBank activeBank = new DigitalBank();
     private static final String CUSTOMER_ID = "077123456789";
     private static final String CUSTOMER_NAME = "ESTHER";
@@ -40,17 +42,17 @@ public class Asm3 {
         int input;
         try {
             while (true) {
-                input = sc.nextInt(); // Người dùng nhập giá trị từ bàn phím và lưu vào biến input
+                input = sc.nextInt();
                 if (input == 1) {
                     showCustomer();
                     menu();
                 }
                 if (input == 2) {
-                    addAtmAccount();
+                    addSavingsAccount();
                     menu();
                 }
                 if (input == 3) {
-                    addCreditAccount();
+                    addLoanAccount();
                     menu();
                 }
                 if (input == 4) {
@@ -75,18 +77,83 @@ public class Asm3 {
     }
 
     private static void addCustomer() {
-        Customer customer = new Customer(CUSTOMER_NAME, CUSTOMER_ID);
-        activeBank.addCustomer(customer);
+        activeBank.addCustomer(CUSTOMER_NAME, CUSTOMER_ID);
     }
 
     private static void showCustomer() {
         Customer customer = activeBank.getCustomerById(CUSTOMER_ID);
+        if (customer != null) {
+            customer.displayInformation();
+        }
     }
 
-    private static void addAtmAccount() {
+    private static void addSavingsAccount() {
+        System.out.println("Nhập số CCCD của khách hàng: ");
+        String customerId = scanner.next();
+        boolean isExisted = activeBank.isCustomerExisted(customerId);
+        while (!isExisted) {
+            System.out.println("Số CCCD không tồn tại.");
+            System.out.println("Vui lòng nhập lại CCCD: ");
+            customerId = scanner.nextLine();
+            isExisted = activeBank.isCustomerExisted(customerId);
+        }
+        System.out.println("Nhập số TK gồm 6 chữ số: ");
+        String accNumber = scanner.next();
+        while (!activeBank.checkAccNumber(accNumber)) {
+            accNumber = scanner.next();
+        }
+        boolean isExistedAccount = activeBank.isAccountExisted(accNumber);
+        while (isExistedAccount) {
+            System.out.println("Số TK bị trùng");
+            System.out.println("Vui lòng nhập lại số TK: ");
+            accNumber = scanner.next();
+            isExistedAccount = activeBank.isAccountExisted(accNumber);
+        }
+
+        System.out.println("Nhập số dư: ");
+        double balance = scanner.nextDouble();
+        while (balance < 50000) {
+            System.out.println("Số dư tối thiểu là 50.000: ");
+            System.out.println("Vui lòng nhập lại: ");
+            balance = scanner.nextDouble();
+        }
+        SavingsAccount account = new SavingsAccount(accNumber, balance);
+        activeBank.addAccount(customerId, account);
     }
 
-    private static void addCreditAccount() {
+
+    private static void addLoanAccount() {
+        System.out.println("Nhập số CCCD của khách hàng: ");
+        String customerId = scanner.next();
+        boolean isExisted = activeBank.isCustomerExisted(customerId);
+        while (!isExisted) {
+            System.out.println("Số CCCD không tồn tại.");
+            System.out.println("Vui lòng nhập lại CCCD: ");
+            customerId = scanner.nextLine();
+            isExisted = activeBank.isCustomerExisted(customerId);
+        }
+        System.out.println("Nhập số TK gồm 6 chữ số: ");
+        String accNumber = scanner.next();
+        while (!activeBank.checkAccNumber(accNumber)) {
+            accNumber = scanner.next();
+        }
+        boolean isExistedAccount = activeBank.isAccountExisted(accNumber);
+        while (isExistedAccount) {
+            System.out.println("Số TK bị trùng");
+            System.out.println("Vui lòng nhập lại số TK: ");
+            accNumber = scanner.next();
+            isExistedAccount = activeBank.isAccountExisted(accNumber);
+        }
+
+        System.out.println("Nhập số dư: ");
+        double balance = scanner.nextDouble();
+        while (balance < 50000) {
+            System.out.println("Số dư tối thiểu là 50.000: ");
+            System.out.println("Vui lòng nhập lại: ");
+            balance = scanner.nextDouble();
+        }
+        LoanAccount account = new LoanAccount(accNumber, balance);
+        activeBank.addAccount(customerId, account);
     }
 
     private static void withDraw() {

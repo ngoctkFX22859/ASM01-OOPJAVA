@@ -4,8 +4,8 @@ import java.text.DecimalFormat;
 
 public class Account {
 
-    private String accountNumber;
-    private double balance;
+    protected String accountNumber;
+    protected double balance;
 
     public Account(String accountNumber, double balance) {
         this.accountNumber = accountNumber;
@@ -34,6 +34,6 @@ public class Account {
 
     public String toString() {
         DecimalFormat decimalFormat = new DecimalFormat("#,##0đ");
-        return " " + accountNumber + "               " + decimalFormat.format(balance);
+        return " " + accountNumber + "                    " + decimalFormat.format(balance);
     }
 }

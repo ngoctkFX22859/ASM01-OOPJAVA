@@ -7,7 +7,7 @@ import java.util.Objects;
 
 
 public class Customer extends User {
-    private List<Account> accounts;
+    public List<Account> accounts;
 
     public Customer(String name, String customerID) {
         super(name, customerID);
