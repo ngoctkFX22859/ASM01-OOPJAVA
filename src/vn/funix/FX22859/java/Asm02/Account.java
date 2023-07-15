@@ -28,12 +28,18 @@ public class Account {
         this.balance = balance;
     }
 
+    public static boolean minBalance(double balance) {
+        return balance >= 50000;
+    }
+
     public boolean isPremium() {
         return getBalance() >= 10000000;
     }
 
     public String toString() {
+        String className = this.getClass().getSimpleName();
+        String subStr = className.substring(0, className.length() - 7).toUpperCase();
         DecimalFormat decimalFormat = new DecimalFormat("#,##0đ");
-        return " " + accountNumber + "                    " + decimalFormat.format(balance);
+        return " " + accountNumber + "            " + subStr + "     " + decimalFormat.format(balance);
     }
 }

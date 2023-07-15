@@ -2,6 +2,7 @@ package vn.funix.FX22859.java.Asm03;
 
 import vn.funix.FX22859.java.Asm02.Customer;
 import vn.funix.FX22859.java.Asm03.models.DigitalBank;
+import vn.funix.FX22859.java.Asm03.models.DigitalCustomer;
 import vn.funix.FX22859.java.Asm03.models.LoanAccount;
 import vn.funix.FX22859.java.Asm03.models.SavingsAccount;
 
@@ -145,18 +146,46 @@ public class Asm3 {
             isExistedAccount = activeBank.isAccountExisted(accNumber);
         }
 
-        System.out.println("Nhập số dư: ");
-        double balance = scanner.nextDouble();
-        while (balance < 50000) {
-            System.out.println("Số dư tối thiểu là 50.000: ");
-            System.out.println("Vui lòng nhập lại: ");
-            balance = scanner.nextDouble();
-        }
+        double balance = 100000000;
         LoanAccount account = new LoanAccount(accNumber, balance);
         activeBank.addAccount(customerId, account);
     }
 
     private static void withDraw() {
+        String accNumber, customerId;
+        double amount;
+        System.out.println("Nhập CCCD của khách hàng: ");
+        customerId = scanner.next();
+        boolean isExisted = activeBank.isCustomerExisted(customerId);
+        while (!isExisted) {
+            System.out.println("Số CCCD không tồn tại.");
+            System.out.println("Vui lòng nhập lại CCCD: ");
+            customerId = scanner.nextLine();
+            isExisted = activeBank.isCustomerExisted(customerId);
+        }
+
+        System.out.println("Nhập số tài khoản của khách hàng: ");
+        accNumber = scanner.next();
+        while (!activeBank.checkAccNumber(accNumber)) {
+            accNumber = scanner.next();
+        }
+        boolean isExistedAccount = activeBank.isAccountExisted(accNumber);
+        while (!isExistedAccount) {
+            System.out.println("Số TK không tồn tại");
+            System.out.println("Vui lòng nhập lại số TK: ");
+            accNumber = scanner.next();
+            isExistedAccount = activeBank.isAccountExisted(accNumber);
+        }
+        System.out.println("Nhập số tiền cần rút: ");
+        amount = scanner.nextDouble();
+
+        DigitalCustomer cus = activeBank.getCustomerById(customerId);
+        Withdraw wd = cus.getWithdraw(accNumber);
+        if (wd.withDraw(amount)) {
+            System.out.println("Giao dich thanh cong");
+        } else {
+            System.out.println("giao dich khong thanh cong");
+        }
     }
 
     private static void transactionHistory() {

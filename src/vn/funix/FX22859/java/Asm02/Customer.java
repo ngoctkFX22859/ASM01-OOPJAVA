@@ -1,5 +1,7 @@
 package vn.funix.FX22859.java.Asm02;
 
+import vn.funix.FX22859.java.Asm03.Withdraw;
+
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,7 +16,7 @@ public class Customer extends User {
         accounts = new ArrayList<Account>();
     }
 
-    public List<Account> getAccount() {
+    public List<Account> getAccounts() {
         return accounts;
     }
 
@@ -52,7 +54,7 @@ public class Customer extends User {
 
     public void displayInformation() {
         String isPre = isPremium() ? "Premium" : "Normal";
-        System.out.println(getCustomerID() + "  " + getName() + "  " + isPre + "  " + getBalance());
+        System.out.println(getCustomerID() + "  " + getName() + "  " + isPre + "              " + getBalance());
 
         int index = 1;
         for (Account account : accounts) {

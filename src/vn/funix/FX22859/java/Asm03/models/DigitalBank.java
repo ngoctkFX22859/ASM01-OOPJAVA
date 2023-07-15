@@ -3,6 +3,7 @@ package vn.funix.FX22859.java.Asm03.models;
 import vn.funix.FX22859.java.Asm02.Account;
 import vn.funix.FX22859.java.Asm02.Bank;
 import vn.funix.FX22859.java.Asm02.Customer;
+import vn.funix.FX22859.java.Asm03.Withdraw;
 
 import java.util.List;
 import java.util.regex.Matcher;
@@ -10,10 +11,12 @@ import java.util.regex.Pattern;
 
 
 public class DigitalBank extends Bank {
-    public Customer getCustomerById(String cusId) {
+    public DigitalCustomer getCustomerById(String cusId) {
         for (Customer customer : getCustomers())
             if (cusId.equals(customer.getCustomerID())) {
-                return customer;
+                if (customer instanceof DigitalCustomer) {
+                    return (DigitalCustomer) customer;
+                }
             }
         return null;
     }
@@ -44,5 +47,4 @@ public class DigitalBank extends Bank {
         Customer customer = new DigitalCustomer(customerName, customerId);
         customers.add(customer);
     }
-
 }

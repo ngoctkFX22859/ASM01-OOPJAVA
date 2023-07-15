@@ -1,5 +1,6 @@
 package vn.funix.FX22859.java.Asm02;
 
+import java.time.chrono.MinguoChronology;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
@@ -122,7 +123,7 @@ public class Asm2 {
         }
         System.out.println("Nhập số dư: ");
         balance = sc.nextDouble();
-        while (balance < 50000) {
+        while (!Account.minBalance(balance)) {
             System.out.println("Số dư tối thiểu là 50.000: ");
             System.out.println("Vui lòng nhập lại: ");
             balance = sc.nextDouble();
