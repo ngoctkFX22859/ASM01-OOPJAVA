@@ -1,11 +1,16 @@
 package vn.funix.FX22859.java.Asm03.models;
 
 import vn.funix.FX22859.java.Asm02.Account;
-import vn.funix.FX22859.java.Asm03.Report;
+import vn.funix.FX22859.java.Asm03.ReportService;
 import vn.funix.FX22859.java.Asm03.Utils;
 import vn.funix.FX22859.java.Asm03.Withdraw;
 
-public class LoanAccount extends Account implements Withdraw, Report {
+import java.text.DecimalFormat;
+
+public class LoanAccount extends Account implements Withdraw, ReportService {
+    private final double LOAN_ACCOUNT_WITHDRAW_PREMIUM_FEE = 0.01;
+    private final double LOAN_ACCOUNT_WITHDRAW_FEE = 0.05;
+    private final double LOAN_ACCOUNT_MAX_BALANCE = 100000000;
 
     public LoanAccount(String accountNumber, double balance) {
         super(accountNumber, balance);
@@ -24,14 +29,14 @@ public class LoanAccount extends Account implements Withdraw, Report {
 
     @Override
     public boolean isAccepted(double amount) {
-        if (amount <= 1000000000 && minBalance(getBalance() - amount)) {
+        if (amount <= LOAN_ACCOUNT_MAX_BALANCE && minBalance(getBalance() - amount)) {
             return true;
         } else {
-            if (amount > 1000000000) {
-                System.out.println("Số tiền đã vượt qua hạn mức 100.000.000đ. Vui lòng nhập lại số tiền cần rút: ");
+            if (amount > LOAN_ACCOUNT_MAX_BALANCE) {
+                System.out.println("Số tiền đã vượt qua hạn mức 100.000.000đ. Giao dịch không thành công!");
             }
             if (!minBalance(getBalance() - amount)) {
-                System.out.println("Số dư sau khi rút không thể dưới 50.000đ. Vui lòng nhập lại số tiền cần rút: ");
+                System.out.println("Số dư sau khi rút không thể dưới 50.000đ. Giao dịch không thành công!");
             }
         }
         return false;
@@ -39,9 +44,9 @@ public class LoanAccount extends Account implements Withdraw, Report {
 
     public double getTransactionFee() {
         if (!isPremium()) {
-            return 0.05;
+            return LOAN_ACCOUNT_WITHDRAW_FEE;
         } else {
-            return 0.01;
+            return LOAN_ACCOUNT_WITHDRAW_PREMIUM_FEE;
         }
     }
 
@@ -56,5 +61,11 @@ public class LoanAccount extends Account implements Withdraw, Report {
         System.out.printf("SO DU: %31s%n", Utils.formatBalance(getBalance()));
         System.out.printf("PHI + VAT: %27s%n", Utils.formatBalance(0.0));
         System.out.println(Utils.getDivider());
+    }
+
+    @Override
+    public String toString() {
+        DecimalFormat decimalFormat = new DecimalFormat("#,##0đ");
+        return " " + accountNumber + "            " + "" + "     " + decimalFormat.format(balance);
     }
 }

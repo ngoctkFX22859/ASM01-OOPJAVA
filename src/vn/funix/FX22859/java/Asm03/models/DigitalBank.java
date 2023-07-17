@@ -1,11 +1,8 @@
 package vn.funix.FX22859.java.Asm03.models;
 
-import vn.funix.FX22859.java.Asm02.Account;
 import vn.funix.FX22859.java.Asm02.Bank;
 import vn.funix.FX22859.java.Asm02.Customer;
-import vn.funix.FX22859.java.Asm03.Withdraw;
 
-import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -40,6 +37,13 @@ public class DigitalBank extends Bank {
             }
         }
         return false;
+    }
+
+    public void withdraw(String customerId, String accNumber, double amount) {
+        DigitalCustomer cus = this.getCustomerById(customerId);
+        if (cus != null) {
+            cus.withdraw(accNumber, amount);
+        }
     }
 
     @Override

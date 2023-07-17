@@ -1,15 +1,22 @@
 package vn.funix.FX22859.java.Asm02;
 
+import vn.funix.FX22859.java.Asm03.Utils;
+import vn.funix.FX22859.java.Asm03.models.Transaction;
+
 import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Account {
 
     protected String accountNumber;
     protected double balance;
+    private List<Transaction> transactions;
 
     public Account(String accountNumber, double balance) {
         this.accountNumber = accountNumber;
         this.balance = balance;
+        this.transactions = new ArrayList<>();
     }
 
     public String getAccountNumber() {
@@ -22,6 +29,10 @@ public class Account {
 
     public double getBalance() {
         return balance;
+    }
+
+    public void addTransaction(String accountNumber, double amount, boolean status) {
+        this.transactions.add(new Transaction(accountNumber, amount, status));
     }
 
     public void setBalance(double balance) {
@@ -37,9 +48,15 @@ public class Account {
     }
 
     public String toString() {
-        String className = this.getClass().getSimpleName();
-        String subStr = className.substring(0, className.length() - 7).toUpperCase();
         DecimalFormat decimalFormat = new DecimalFormat("#,##0đ");
-        return " " + accountNumber + "            " + subStr + "     " + decimalFormat.format(balance);
+        return " " + accountNumber + "                    " + decimalFormat.format(balance);
     }
+
+    public void transactionInfo() {
+        for (Transaction transaction : transactions) {
+            transaction.displayTransaction();
+        }
+    }
+
+
 }

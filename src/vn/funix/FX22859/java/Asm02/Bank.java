@@ -32,6 +32,8 @@ public class Bank {
                 return true;
             }
         }
+        System.out.println("Số CCCD không tồn tại.");
+        System.out.println("Vui lòng nhập lại CCCD: ");
         return false;
     }
 
@@ -39,6 +41,7 @@ public class Bank {
         for (Customer customer : customers) {
             if (customer.getCustomerID().equals(customerId)) {
                 customer.addAccount(account);
+                System.out.println("Thêm tài khoản thành công!");
                 return;
             }
         }

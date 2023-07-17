@@ -1,5 +1,6 @@
 package vn.funix.FX22859.java.Asm03;
 
+import vn.funix.FX22859.java.Asm02.Account;
 import vn.funix.FX22859.java.Asm02.Customer;
 import vn.funix.FX22859.java.Asm03.models.DigitalBank;
 import vn.funix.FX22859.java.Asm03.models.DigitalCustomer;
@@ -13,6 +14,7 @@ public class Asm3 {
     private static final Integer EXIT_ERROR_CODE = -1;
     public static final Scanner scanner = new Scanner(System.in);
     private static final DigitalBank activeBank = new DigitalBank();
+    private static final double LOAN_ACCOUNT_MAX_BALANCE = 100000000;
     private static final String CUSTOMER_ID = "077123456789";
     private static final String CUSTOMER_NAME = "ESTHER";
     public static String AUTHOR = "FX22859";
@@ -72,30 +74,29 @@ public class Asm3 {
             }
         } catch (Exception e) {
             e.printStackTrace(); //phương thức printStackTrace() sẽ in ra thông báo lỗi vào console, giúp xác định nguyên nhân và vị trí của lỗi trong chương trình.
-            sc.nextLine();
+            sc.next();
             System.out.println("Lỗi nhập liệu hoặc số bạn nhập không hợp lệ. Vui lòng nhập lại.");
         }
     }
 
+    // KHỞI TẠO KH
     private static void addCustomer() {
         activeBank.addCustomer(CUSTOMER_NAME, CUSTOMER_ID);
     }
 
+    // XEM THÔNG TIN KHÁCH HÀNG
     private static void showCustomer() {
         Customer customer = activeBank.getCustomerById(CUSTOMER_ID);
-        if (customer != null) {
-            customer.displayInformation();
-        }
+        customer.displayInformation();
     }
 
+    //THÊM TÀI KHOẢN ATM
     private static void addSavingsAccount() {
         System.out.println("Nhập số CCCD của khách hàng: ");
         String customerId = scanner.next();
         boolean isExisted = activeBank.isCustomerExisted(customerId);
         while (!isExisted) {
-            System.out.println("Số CCCD không tồn tại.");
-            System.out.println("Vui lòng nhập lại CCCD: ");
-            customerId = scanner.nextLine();
+            customerId = scanner.next();
             isExisted = activeBank.isCustomerExisted(customerId);
         }
         System.out.println("Nhập số TK gồm 6 chữ số: ");
@@ -113,24 +114,25 @@ public class Asm3 {
 
         System.out.println("Nhập số dư: ");
         double balance = scanner.nextDouble();
-        while (balance < 50000) {
+        boolean isMinBalance = Account.minBalance(balance);
+
+        while (!isMinBalance) {
             System.out.println("Số dư tối thiểu là 50.000: ");
             System.out.println("Vui lòng nhập lại: ");
             balance = scanner.nextDouble();
+            isMinBalance = Account.minBalance(balance);
         }
         SavingsAccount account = new SavingsAccount(accNumber, balance);
         activeBank.addAccount(customerId, account);
     }
 
-
+    //THÊM TÀI KHOẢN TÍN DỤNG
     private static void addLoanAccount() {
         System.out.println("Nhập số CCCD của khách hàng: ");
         String customerId = scanner.next();
         boolean isExisted = activeBank.isCustomerExisted(customerId);
         while (!isExisted) {
-            System.out.println("Số CCCD không tồn tại.");
-            System.out.println("Vui lòng nhập lại CCCD: ");
-            customerId = scanner.nextLine();
+            customerId = scanner.next();
             isExisted = activeBank.isCustomerExisted(customerId);
         }
         System.out.println("Nhập số TK gồm 6 chữ số: ");
@@ -146,11 +148,12 @@ public class Asm3 {
             isExistedAccount = activeBank.isAccountExisted(accNumber);
         }
 
-        double balance = 100000000;
+        double balance = LOAN_ACCOUNT_MAX_BALANCE;
         LoanAccount account = new LoanAccount(accNumber, balance);
         activeBank.addAccount(customerId, account);
     }
 
+    // RÚT TIỀN
     private static void withDraw() {
         String accNumber, customerId;
         double amount;
@@ -158,9 +161,7 @@ public class Asm3 {
         customerId = scanner.next();
         boolean isExisted = activeBank.isCustomerExisted(customerId);
         while (!isExisted) {
-            System.out.println("Số CCCD không tồn tại.");
-            System.out.println("Vui lòng nhập lại CCCD: ");
-            customerId = scanner.nextLine();
+            customerId = scanner.next();
             isExisted = activeBank.isCustomerExisted(customerId);
         }
 
@@ -179,17 +180,22 @@ public class Asm3 {
         System.out.println("Nhập số tiền cần rút: ");
         amount = scanner.nextDouble();
 
-        DigitalCustomer cus = activeBank.getCustomerById(customerId);
-        Withdraw wd = cus.getWithdraw(accNumber);
-        if (wd.withDraw(amount)) {
-            System.out.println("Giao dich thanh cong");
-        } else {
-            System.out.println("giao dich khong thanh cong");
+        activeBank.withdraw(customerId, accNumber, amount);
+    }
+
+    //TRA CỨU LỊCH SỬ GIAO DỊCH
+    private static void transactionHistory() {
+        System.out.println("Nhập số CCCD của khách hàng: ");
+        String customerId = scanner.next();
+        boolean isExisted = activeBank.isCustomerExisted(customerId);
+        while (!isExisted) {
+            customerId = scanner.next();
+            isExisted = activeBank.isCustomerExisted(customerId);
+        }
+        Customer customer = activeBank.getCustomerById(customerId);
+        customer.displayInformation();
+        for (Account account : customer.getAccounts()) {
+            account.transactionInfo();
         }
     }
-
-    private static void transactionHistory() {
-    }
-
-
 }

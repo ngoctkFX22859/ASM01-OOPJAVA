@@ -1,12 +1,13 @@
 package vn.funix.FX22859.java.Asm03.models;
 
 import vn.funix.FX22859.java.Asm02.Account;
-import vn.funix.FX22859.java.Asm02.Customer;
-import vn.funix.FX22859.java.Asm03.Report;
+import vn.funix.FX22859.java.Asm03.ReportService;
 import vn.funix.FX22859.java.Asm03.Utils;
 import vn.funix.FX22859.java.Asm03.Withdraw;
 
-public class SavingsAccount extends Account implements Withdraw, Report {
+import java.text.DecimalFormat;
+
+public class SavingsAccount extends Account implements Withdraw, ReportService {
     private final double SAVINGS_ACCOUNT_MAX_WITHDRAW = 5000000;
 
     public SavingsAccount(String accountNumber, double balance) {
@@ -32,7 +33,7 @@ public class SavingsAccount extends Account implements Withdraw, Report {
                 if (amount <= SAVINGS_ACCOUNT_MAX_WITHDRAW) {
                     return true;
                 } else {
-                    System.out.println("Không thể rút trên 5.000.000đ trong một giao dịch. Vui lòng nhập lại số tiền cần rút: ");
+                    System.out.println("Không thể rút trên 5.000.000đ trong một giao dịch. Giao dịch không thành công!");
                     return false;
                 }
             } else {
@@ -40,11 +41,11 @@ public class SavingsAccount extends Account implements Withdraw, Report {
             }
         } else {
             if (!minBalance(getBalance() - amount)) {
-                System.out.println("Số dư sau khi rút không thể dưới 50.000đ. Vui lòng nhập lại số tiền cần rút: ");
+                System.out.println("Số dư sau khi rút không thể dưới 50.000đ. Giao dịch không thành công!");
             } else if (amount % 10000 != 0) {
-                System.out.println("Số tiền rút phải là bội số của 10.000đ. Vui lòng nhập lại số tiền cần rút: ");
+                System.out.println("Số tiền rút phải là bội số của 10.000đ. Giao dịch không thành công!");
             } else if (amount < minAmount) {
-                System.out.println("Số tiền rút tối thiểu 50.000đ. Vui lòng nhập lại số tiền cần rút: ");
+                System.out.println("Số tiền rút tối thiểu 50.000đ. Giao dịch không thành công!");
             }
         }
         return false;
@@ -61,5 +62,11 @@ public class SavingsAccount extends Account implements Withdraw, Report {
         System.out.printf("SO DU: %31s%n", Utils.formatBalance(getBalance()));
         System.out.printf("PHI + VAT: %27s%n", Utils.formatBalance(0.0));
         System.out.println(Utils.getDivider());
+    }
+
+    @Override
+    public String toString() {
+        DecimalFormat decimalFormat = new DecimalFormat("#,##0đ");
+        return " " + accountNumber + "            " + "SAVINGS" + "     " + decimalFormat.format(balance);
     }
 }
