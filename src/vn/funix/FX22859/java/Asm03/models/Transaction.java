@@ -19,13 +19,8 @@ public class Transaction {
         this.status = status;
     }
 
-
     public String getId() {
         return id;
-    }
-
-    public String getAccountNumber() {
-        return accountNumber;
     }
 
     public double getAmount() {
@@ -41,6 +36,7 @@ public class Transaction {
     }
 
     public void displayTransaction() {
-        System.out.println("[GD]   " + accountNumber + " | " + Utils.formatBalance(this.getAmount()) + "    |   " + this.getTime() + "        |       " + (this.isStatus() ? "Giao dịch thành công" : "Giao dịch không thành công"));
+        System.out.println(Utils.getDivider());
+        System.out.println("[GD]  " + this.getId() + "   " + accountNumber + " | " + Utils.formatBalance(this.getAmount()) + "   |  " + this.getTime() + "   |  " + (this.isStatus() ? "Giao dịch thành công" : "Giao dịch không thành công"));
     }
 }

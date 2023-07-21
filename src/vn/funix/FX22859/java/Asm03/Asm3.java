@@ -1,7 +1,6 @@
 package vn.funix.FX22859.java.Asm03;
 
 import vn.funix.FX22859.java.Asm02.Account;
-import vn.funix.FX22859.java.Asm02.Customer;
 import vn.funix.FX22859.java.Asm03.models.DigitalBank;
 import vn.funix.FX22859.java.Asm03.models.DigitalCustomer;
 import vn.funix.FX22859.java.Asm03.models.LoanAccount;
@@ -68,12 +67,12 @@ public class Asm3 {
                 }
                 if (input == 0) {
                     System.out.println("Exit!");
-                    System.exit(0); // Kết thúc chương trình
+                    System.exit(EXIT_COMMAND_CODE); // Kết thúc chương trình
                 }
                 System.out.println("Số bạn nhập không đúng, vui lòng nhập lại");
             }
         } catch (Exception e) {
-            e.printStackTrace(); //phương thức printStackTrace() sẽ in ra thông báo lỗi vào console, giúp xác định nguyên nhân và vị trí của lỗi trong chương trình.
+            e.printStackTrace(); //phương thức printStackTrace() sẽ in ra thông báo lỗi vào console.
             sc.next();
             System.out.println("Lỗi nhập liệu hoặc số bạn nhập không hợp lệ. Vui lòng nhập lại.");
         }
@@ -84,13 +83,13 @@ public class Asm3 {
         activeBank.addCustomer(CUSTOMER_NAME, CUSTOMER_ID);
     }
 
-    // XEM THÔNG TIN KHÁCH HÀNG
+    //CN1: XEM THÔNG TIN KHÁCH HÀNG
     private static void showCustomer() {
-        Customer customer = activeBank.getCustomerById(CUSTOMER_ID);
+        DigitalCustomer customer = activeBank.getCustomerById(CUSTOMER_ID);
         customer.displayInformation();
     }
 
-    //THÊM TÀI KHOẢN ATM
+    //CN2: THÊM TÀI KHOẢN ATM
     private static void addSavingsAccount() {
         System.out.println("Nhập số CCCD của khách hàng: ");
         String customerId = scanner.next();
@@ -122,11 +121,12 @@ public class Asm3 {
             balance = scanner.nextDouble();
             isMinBalance = Account.minBalance(balance);
         }
+        // Tạo đối tượng mới cho lớp SavingsAccount
         SavingsAccount account = new SavingsAccount(accNumber, balance);
         activeBank.addAccount(customerId, account);
     }
 
-    //THÊM TÀI KHOẢN TÍN DỤNG
+    //CN3: THÊM TÀI KHOẢN TÍN DỤNG
     private static void addLoanAccount() {
         System.out.println("Nhập số CCCD của khách hàng: ");
         String customerId = scanner.next();
@@ -149,11 +149,13 @@ public class Asm3 {
         }
 
         double balance = LOAN_ACCOUNT_MAX_BALANCE;
+
+        // Tạo đối tượng mới cho lớp LoanAccount
         LoanAccount account = new LoanAccount(accNumber, balance);
         activeBank.addAccount(customerId, account);
     }
 
-    // RÚT TIỀN
+    //CN4: RÚT TIỀN
     private static void withDraw() {
         String accNumber, customerId;
         double amount;
@@ -180,10 +182,11 @@ public class Asm3 {
         System.out.println("Nhập số tiền cần rút: ");
         amount = scanner.nextDouble();
 
+        //Thực hiện rút tiền
         activeBank.withdraw(customerId, accNumber, amount);
     }
 
-    //TRA CỨU LỊCH SỬ GIAO DỊCH
+    //CN5: TRA CỨU LỊCH SỬ GIAO DỊCH
     private static void transactionHistory() {
         System.out.println("Nhập số CCCD của khách hàng: ");
         String customerId = scanner.next();
@@ -192,8 +195,12 @@ public class Asm3 {
             customerId = scanner.next();
             isExisted = activeBank.isCustomerExisted(customerId);
         }
-        Customer customer = activeBank.getCustomerById(customerId);
+
+        // In thông tin KH
+        DigitalCustomer customer = activeBank.getCustomerById(customerId);
         customer.displayInformation();
+
+        // In lịch sử giao dịch của KH trên
         for (Account account : customer.getAccounts()) {
             account.transactionInfo();
         }

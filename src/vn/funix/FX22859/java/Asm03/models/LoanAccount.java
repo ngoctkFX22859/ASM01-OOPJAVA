@@ -53,19 +53,19 @@ public class LoanAccount extends Account implements Withdraw, ReportService {
     @Override
     public void log(double amount) {
         System.out.println(Utils.getDivider());
-        System.out.printf("%30s%n", Utils.getTitle() + " SAVING");
+        System.out.printf("%30s%n", Utils.getTitle() + "LOAN");
         System.out.printf("NGAY G/D: %28s%n", Utils.getDateTime());
         System.out.printf("ATM ID: %30s%n", "DIGITAL-BANK-ATM 2023");
         System.out.printf("SO TK: %31s%n", getAccountNumber());
         System.out.printf("SO TIEN: %29s%n", Utils.formatBalance(amount));
         System.out.printf("SO DU: %31s%n", Utils.formatBalance(getBalance()));
-        System.out.printf("PHI + VAT: %27s%n", Utils.formatBalance(0.0));
+        System.out.printf("PHI + VAT: %27s%n", Utils.formatBalance(amount * getTransactionFee()));
         System.out.println(Utils.getDivider());
     }
 
     @Override
     public String toString() {
         DecimalFormat decimalFormat = new DecimalFormat("#,##0đ");
-        return " " + accountNumber + "            " + "" + "     " + decimalFormat.format(balance);
+        return " " + accountNumber + "            " + "LOAN" + "     " + decimalFormat.format(balance);
     }
 }

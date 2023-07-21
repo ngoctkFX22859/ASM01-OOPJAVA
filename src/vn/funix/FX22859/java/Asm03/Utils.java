@@ -10,7 +10,7 @@ public class Utils {
     }
 
     public static String getTitle() {
-        return "BIEN LAI GIAO DICH";
+        return "BIÊN LAI GIAO DỊCH";
     }
 
     public static String getDateTime() {
@@ -20,6 +20,6 @@ public class Utils {
     }
 
     public static String formatBalance(double amount) {
-        return String.format("% ,.2f", amount) + "đ.";
+        return String.format("% ,.0f", amount) + "đ";
     }
 }

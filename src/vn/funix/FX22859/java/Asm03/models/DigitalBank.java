@@ -48,7 +48,7 @@ public class DigitalBank extends Bank {
 
     @Override
     public void addCustomer(String customerName, String customerId) {
-        Customer customer = new DigitalCustomer(customerName, customerId);
+        DigitalCustomer customer = new DigitalCustomer(customerName, customerId);
         customers.add(customer);
     }
 }

@@ -36,11 +36,11 @@ public class DigitalCustomer extends Customer {
         boolean status;
         Account acc = this.getAccountBy(accountNumber);
         if (acc != null) {
-            if (acc instanceof Withdraw) {
-                Withdraw wd = (Withdraw) acc;
+            if (acc instanceof Withdraw) { // Kiểm tra acc có là một đối tượng lớp con của Withdraw
+                Withdraw wd = (Withdraw) acc; //downcasting
                 status = wd.withDraw(amount);
                 acc.addTransaction(accountNumber, -amount, status);
-                if (wd.withDraw(amount)) {
+                if (status) {
                     if (acc instanceof ReportService) {
                         ReportService rp = (ReportService) acc;
                         rp.log(amount);
