@@ -1,9 +1,10 @@
 package vn.funix.FX22859.java.Asm02;
 
+import java.io.Serializable;
 import java.util.HashMap;
 
 
-public class User {
+public class User implements Serializable {
     private String name;
     private String customerID;
     private static HashMap<String, String> danhSachDonViMap = new HashMap<>();

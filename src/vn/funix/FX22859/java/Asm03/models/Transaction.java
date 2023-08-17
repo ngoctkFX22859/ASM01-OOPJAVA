@@ -11,12 +11,23 @@ public class Transaction {
     private String time;
     private boolean status;
 
+    private TransactionType type = TransactionType.WITHDRAW;
+
     public Transaction(String accountNumber, double amount, boolean status) {
         this.id = String.valueOf(UUID.randomUUID()).substring(0, 6);
         this.accountNumber = accountNumber;
         this.amount = amount;
         this.time = Utils.getDateTime();
         this.status = status;
+    }
+
+    public Transaction(String accountNumber, double amount, boolean status, TransactionType type) {
+        this.id = String.valueOf(UUID.randomUUID()).substring(0, 6);
+        this.accountNumber = accountNumber;
+        this.amount = amount;
+        this.time = Utils.getDateTime();
+        this.status = status;
+        this.type = type;
     }
 
     public String getId() {

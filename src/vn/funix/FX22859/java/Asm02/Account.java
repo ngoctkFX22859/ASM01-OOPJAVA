@@ -1,17 +1,21 @@
 package vn.funix.FX22859.java.Asm02;
 
-import vn.funix.FX22859.java.Asm03.Utils;
 import vn.funix.FX22859.java.Asm03.models.Transaction;
+import vn.funix.FX22859.java.Asm03.models.TransactionType;
+import vn.funix.FX22859.java.Asm04.dao.TransactionDao;
 
+import java.io.IOException;
+import java.io.Serializable;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Account {
+public class Account implements Serializable {
 
     protected String accountNumber;
     protected double balance;
     private List<Transaction> transactions;
+    private String customerId;
 
     public Account(String accountNumber, double balance) {
         this.accountNumber = accountNumber;
@@ -19,8 +23,19 @@ public class Account {
         this.transactions = new ArrayList<>();
     }
 
+    public Account(String customerId, String accountNumber, double balance) {
+        this.accountNumber = accountNumber;
+        this.balance = balance;
+        this.transactions = new ArrayList<>();
+        this.customerId = customerId;
+    }
+
     public String getAccountNumber() {
         return accountNumber;
+    }
+
+    public String getCustomerId() {
+        return customerId;
     }
 
     public void setAccountNumber(String accountNumber) {
@@ -49,7 +64,7 @@ public class Account {
 
     public String toString() {
         DecimalFormat decimalFormat = new DecimalFormat("#,##0đ");
-        return " " + accountNumber + "                    " + decimalFormat.format(balance);
+        return " " + accountNumber + "                     " + decimalFormat.format(balance);
     }
 
     public void transactionInfo() {
@@ -58,5 +73,9 @@ public class Account {
         }
     }
 
-
+    public void createTransaction(double amount, boolean status, TransactionType type) throws IOException {
+        Transaction trans = new Transaction(accountNumber, amount, true, type);
+        transactions.add(trans);
+        TransactionDao.save(transactions);
+    }
 }

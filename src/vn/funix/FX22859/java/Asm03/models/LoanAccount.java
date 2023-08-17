@@ -66,6 +66,7 @@ public class LoanAccount extends Account implements Withdraw, ReportService {
     @Override
     public String toString() {
         DecimalFormat decimalFormat = new DecimalFormat("#,##0đ");
-        return " " + accountNumber + "            " + "LOAN" + "     " + decimalFormat.format(balance);
+        String accountType = "LOANS";
+        return " " + accountNumber + "            " + accountType + "     " + decimalFormat.format(balance);
     }
 }

@@ -4,14 +4,20 @@ import vn.funix.FX22859.java.Asm02.Account;
 import vn.funix.FX22859.java.Asm03.ReportService;
 import vn.funix.FX22859.java.Asm03.Utils;
 import vn.funix.FX22859.java.Asm03.Withdraw;
+import vn.funix.FX22859.java.Asm04.ITransfer;
 
+import java.io.Serializable;
 import java.text.DecimalFormat;
 
-public class SavingsAccount extends Account implements Withdraw, ReportService {
+public class SavingsAccount extends Account implements Withdraw, ReportService, ITransfer {
     private final double SAVINGS_ACCOUNT_MAX_WITHDRAW = 5000000;
 
     public SavingsAccount(String accountNumber, double balance) {
         super(accountNumber, balance);
+    }
+
+    public SavingsAccount(String customerId, String accountNumber, double balance) {
+        super(customerId, accountNumber, balance);
     }
 
     @Override
@@ -64,9 +70,40 @@ public class SavingsAccount extends Account implements Withdraw, ReportService {
         System.out.println(Utils.getDivider());
     }
 
+    public void logTransfer(Account receivedAccount, double amount) {
+        System.out.println(Utils.getDivider());
+        System.out.printf("%30s%n", Utils.getTitle() + " SAVING");
+        System.out.printf("NGAY G/D: %28s%n", Utils.getDateTime());
+        System.out.printf("ATM ID: %30s%n", "DIGITAL-BANK-ATM 2023");
+        System.out.printf("SO TK: %31s%n", getAccountNumber());
+        System.out.printf("SO TK NHAN: %26s%n", receivedAccount.getAccountNumber());
+        System.out.printf("SO TIEN CHUYEN: %22s%n", Utils.formatBalance(amount));
+        System.out.printf("SO DU: %31s%n", Utils.formatBalance(getBalance()));
+        System.out.printf("PHI + VAT: %27s%n", Utils.formatBalance(0.0));
+        System.out.println(Utils.getDivider());
+    }
+
     @Override
     public String toString() {
         DecimalFormat decimalFormat = new DecimalFormat("#,##0đ");
-        return " " + accountNumber + "            " + "SAVINGS" + "     " + decimalFormat.format(balance);
+        String accountType = "SAVINGS";
+        return " " + accountNumber + "              " + accountType + "   " + decimalFormat.format(balance);
     }
+
+    @Override
+    public boolean transfers(Account receiveAccount, double amount) {
+        if (isAccepted(amount)) {
+            double newBalance = getBalance() - amount;
+            setBalance(newBalance);
+            // add Transaction
+            newBalance = receiveAccount.getBalance() + amount;
+            receiveAccount.setBalance(newBalance);
+            System.out.println("Giao dịch thành công");
+            logTransfer(receiveAccount, amount);
+            return true;
+        }
+        System.out.println("Giao dịch không thành công");
+        return false;
+    }
+
 }

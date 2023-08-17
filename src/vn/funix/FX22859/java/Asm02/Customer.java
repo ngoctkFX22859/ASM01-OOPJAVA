@@ -20,6 +20,10 @@ public class Customer extends User {
         return accounts;
     }
 
+    public void setAccounts(List<Account> accounts) {
+        this.accounts = accounts;
+    }
+
     public boolean isPremium() {
         for (Account account : accounts) {
             if (account.isPremium())
@@ -41,6 +45,14 @@ public class Customer extends User {
         return false;
     }
 
+    public Account getAccount(String accountNumber) {
+        for (Account account : accounts) {
+            if (Objects.equals(accountNumber, account.getAccountNumber())) {
+                return account;
+            }
+        }
+        return null;
+    }
 
     public String getBalance() {
         double total = 0;

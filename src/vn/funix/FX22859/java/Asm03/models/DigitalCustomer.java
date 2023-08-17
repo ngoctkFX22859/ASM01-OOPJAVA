@@ -5,7 +5,10 @@ import vn.funix.FX22859.java.Asm02.Customer;
 import vn.funix.FX22859.java.Asm03.ReportService;
 import vn.funix.FX22859.java.Asm03.Withdraw;
 
-public class DigitalCustomer extends Customer {
+import java.io.Serializable;
+
+public class DigitalCustomer extends Customer implements Serializable {
+
 
     public DigitalCustomer(String name, String customerID) {
         super(name, customerID);
@@ -23,7 +26,7 @@ public class DigitalCustomer extends Customer {
     @Override
     public void displayInformation() {
         String isPre = isPremium() ? "Premium" : "Normal";
-        System.out.println(getCustomerID() + "  " + getName() + "  " + isPre + "  " + getBalance());
+        System.out.println(getCustomerID() + "  " + getName() + "  " + isPre + "   " + getBalance());
 
         int index = 1;
         for (Account account : accounts) {

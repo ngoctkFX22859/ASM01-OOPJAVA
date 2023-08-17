@@ -27,23 +27,31 @@ public class Bank {
     }
 
     public boolean isCustomerExisted(String customerId) {
-        for (Customer customer : customers) {
-            if (Objects.equals(customerId, customer.getCustomerID())) {
-                return true;
-            }
+        boolean customerExists = customers.stream()
+                .anyMatch(customer -> Objects.equals(customerId, customer.getCustomerID()));
+
+        if (!customerExists) {
+            System.out.println("Số CCCD không tồn tại.");
+            System.out.println("Vui lòng nhập lại CCCD: ");
         }
-        System.out.println("Số CCCD không tồn tại.");
-        System.out.println("Vui lòng nhập lại CCCD: ");
-        return false;
+
+        return customerExists;
+    }
+
+    public Customer getCustomer(String customerId) {
+        return customers.stream()
+                .filter(customer -> customer.getCustomerID().equals(customerId))
+                .findFirst().orElse(null);
     }
 
     public void addAccount(String customerId, Account account) {
-        for (Customer customer : customers) {
-            if (customer.getCustomerID().equals(customerId)) {
-                customer.addAccount(account);
-                System.out.println("Thêm tài khoản thành công!");
-                return;
-            }
-        }
+        customers.stream()
+                .filter(customer -> customer.getCustomerID().equals(customerId))
+                .findFirst()
+                .ifPresent(customer -> {
+                    customer.addAccount(account);
+                    System.out.println("Thêm tài khoản thành công!");
+                });
     }
+
 }
