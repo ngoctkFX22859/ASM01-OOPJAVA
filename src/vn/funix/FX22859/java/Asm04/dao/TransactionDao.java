@@ -8,15 +8,21 @@ import java.io.IOException;
 import java.util.List;
 
 public class TransactionDao {
-    private final static String FILE_PATH = "store/transactions.dat";
 
-    //function lưu danh sách tài khoản vào file
-    public static void save(List<Transaction> transactions) throws IOException {
-        BinaryFileService.writeFile(FILE_PATH, transactions);
-    }
+  private final static String FILE_PATH = "/src/vn/funix/FX22859/java/Asm04/store/transactions.dat";
 
-    //function lấy ra danh sách tài khoản từ file
-    public static List<Transaction> list() {
-        return BinaryFileService.readFile(FILE_PATH);
-    }
+  private static String getFilePath() {
+    String projectPath = System.getProperty("user.dir");
+    return projectPath + FILE_PATH;
+  }
+
+  //function lưu danh sách tài khoản vào file
+  public static void save(List<Transaction> transactions) throws IOException {
+    BinaryFileService.writeFile(getFilePath(), transactions);
+  }
+
+  //function lấy ra danh sách tài khoản từ file
+  public static List<Transaction> list() {
+    return BinaryFileService.readFile(getFilePath());
+  }
 }
