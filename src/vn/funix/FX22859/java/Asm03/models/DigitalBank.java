@@ -159,6 +159,7 @@ public class DigitalBank extends Bank {
                 return true;
             }
             */
+            /*
             SavingsAccount senderAcc = (SavingsAccount) existedSendAccount;
             if (senderAcc.isAccepted(amount)) {
                 double newBalance = senderAcc.getBalance() - amount;
@@ -183,7 +184,16 @@ public class DigitalBank extends Bank {
                     throw new RuntimeException(e);
                 }
             }
+
+             */
+
+
+            SavingsAccount senderAcc = (SavingsAccount) existedSendAccount;
+            SavingsAccount receiveAcc = (SavingsAccount) existedReceiveAccount;
+
+            senderAcc.transfers(receiveAcc, amount);
         }
+
     }
 
 

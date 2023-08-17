@@ -79,7 +79,7 @@ public class Asm04 {
                 System.out.println("Số bạn nhập không đúng, vui lòng nhập lại");
             }
         } catch (Exception e) {
-            e.printStackTrace(); //phương thức printStackTrace() sẽ in ra thông báo lỗi vào console.
+            e.printStackTrace();
             sc.next();
             System.out.println("Lỗi nhập liệu hoặc số bạn nhập không hợp lệ. Vui lòng nhập lại.");
         }
@@ -156,7 +156,7 @@ public class Asm04 {
         AccountDao.save(customer.getAccounts());
     }
 
-    //CN4: CHUYỂN
+    //CN4: CHUYỂN TIỀN
     public static void transfer() {
         System.out.println("Nhập số CCCD của khách hàng: ");
         String customerId = scanner.next();
@@ -168,5 +168,16 @@ public class Asm04 {
         }
     }
 
+    //CN5: RÚT TIỀN
+    public static void withDraw() {
+        System.out.println("Nhập số CCCD của khách hàng: ");
+        String customerId = scanner.next();
+        boolean isExisted = activeBank.isCustomerExisted(customerId);
+        while (!isExisted) {
+            customerId = scanner.next();
+            isExisted = activeBank.isCustomerExisted(customerId);
+        }
+        
+    }
 
 }

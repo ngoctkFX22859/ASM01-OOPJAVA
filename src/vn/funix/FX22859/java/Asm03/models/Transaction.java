@@ -11,6 +11,7 @@ public class Transaction {
     private String time;
     private boolean status;
 
+
     private TransactionType type = TransactionType.WITHDRAW;
 
     public Transaction(String accountNumber, double amount, boolean status) {
