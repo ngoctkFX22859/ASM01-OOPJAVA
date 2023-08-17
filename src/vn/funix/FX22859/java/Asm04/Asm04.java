@@ -171,5 +171,14 @@ public class Asm04 {
     }
   }
 
-
+  //CN5: RÚT TIỀN
+  public static void withDraw() {
+    System.out.println("Nhập số CCCD của khách hàng: ");
+    String customerId = scanner.next();
+    boolean isExisted = activeBank.isCustomerExisted(customerId);
+    while (!isExisted) {
+      customerId = scanner.next();
+      isExisted = activeBank.isCustomerExisted(customerId);
+    }
+  }
 }

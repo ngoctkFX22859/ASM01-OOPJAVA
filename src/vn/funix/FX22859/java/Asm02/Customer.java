@@ -1,11 +1,12 @@
 package vn.funix.FX22859.java.Asm02;
 
-import vn.funix.FX22859.java.Asm03.Withdraw;
+import vn.funix.FX22859.java.Asm03.models.SavingsAccount;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.Scanner;
 
 
 public class Customer extends User {
@@ -74,5 +75,28 @@ public class Customer extends User {
             index++;
         }
     }
+/*
+    public void withdraw(Scanner scanner) {
+        List<Account> accounts = getAccounts();
 
+        if (!accounts.isEmpty()) {
+            Account account;
+            double amount;
+            do {
+                System.out.print("Nhập số tài khoản: ");
+                account = getAccounts(accounts);
+            } while (account == null);
+            do {
+                System.out.print("Nhập số tiền rút: ");
+                amount = Double.parseDouble(scanner.nextLine());
+            } while (amount <= 0);
+            if (account instanceof SavingsAccount) {
+                ((SavingsAccount) account).withDraw(amount);
+            }
+        } else {
+            System.out.println("Khách hàng không có tài khoản nào, thao tác không thành công");
+        }
+    }
+
+ */
 }

@@ -6,8 +6,8 @@ import vn.funix.FX22859.java.Asm03.Utils;
 import vn.funix.FX22859.java.Asm03.Withdraw;
 import vn.funix.FX22859.java.Asm04.ITransfer;
 
-import java.io.Serializable;
 import java.text.DecimalFormat;
+
 
 public class SavingsAccount extends Account implements Withdraw, ReportService, ITransfer {
     private final double SAVINGS_ACCOUNT_MAX_WITHDRAW = 5000000;

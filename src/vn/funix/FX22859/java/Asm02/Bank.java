@@ -29,12 +29,6 @@ public class Bank {
     public boolean isCustomerExisted(String customerId) {
         boolean customerExists = customers.stream()
                 .anyMatch(customer -> Objects.equals(customerId, customer.getCustomerID()));
-
-        if (!customerExists) {
-            System.out.println("Số CCCD không tồn tại.");
-            System.out.println("Vui lòng nhập lại CCCD: ");
-        }
-
         return customerExists;
     }
 
