@@ -20,6 +20,6 @@ public class Utils {
     }
 
     public static String formatBalance(double amount) {
-        return String.format("% ,.0f", amount) + "đ";
+        return String.format("%,.0f", amount) + "đ";
     }
 }

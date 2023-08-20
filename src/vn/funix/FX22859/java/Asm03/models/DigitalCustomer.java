@@ -8,7 +8,7 @@ import vn.funix.FX22859.java.Asm03.Withdraw;
 import java.io.Serializable;
 
 public class DigitalCustomer extends Customer implements Serializable {
-
+    private static final long serialVersionUID = 6529685098267757690L;
 
     public DigitalCustomer(String name, String customerID) {
         super(name, customerID);

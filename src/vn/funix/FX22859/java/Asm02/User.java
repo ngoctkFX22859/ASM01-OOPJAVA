@@ -5,6 +5,7 @@ import java.util.HashMap;
 
 
 public class User implements Serializable {
+    private static final long serialVersionUID = 6529685098267757690L;
     private String name;
     private String customerID;
     private static HashMap<String, String> danhSachDonViMap = new HashMap<>();

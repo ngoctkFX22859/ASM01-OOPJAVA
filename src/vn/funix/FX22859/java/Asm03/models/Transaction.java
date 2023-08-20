@@ -2,9 +2,11 @@ package vn.funix.FX22859.java.Asm03.models;
 
 import vn.funix.FX22859.java.Asm03.Utils;
 
+import java.io.Serializable;
 import java.util.UUID;
 
-public class Transaction {
+public class Transaction implements Serializable {
+    private static final long serialVersionUID = 6529685098267757690L;
     private String id;
     private String accountNumber;
     private double amount;
@@ -31,6 +33,10 @@ public class Transaction {
         this.type = type;
     }
 
+    public String getAccountNumber() {
+        return accountNumber;
+    }
+
     public String getId() {
         return id;
     }
@@ -48,7 +54,18 @@ public class Transaction {
     }
 
     public void displayTransaction() {
+        String amountString = "";
+        switch (type) {
+            case TRANSFER, WITHDRAW:
+                amountString = "-" + Utils.formatBalance(this.getAmount());
+                break;
+            case DEPOSIT:
+                amountString = "+" + Utils.formatBalance(this.getAmount());
+                break;
+            default:
+                break;
+        }
         System.out.println(Utils.getDivider());
-        System.out.println("[GD]  " + this.getId() + "   " + accountNumber + " | " + Utils.formatBalance(this.getAmount()) + "   |  " + this.getTime() + "   |  " + (this.isStatus() ? "Giao dịch thành công" : "Giao dịch không thành công"));
+        System.out.println("[GD]  " + accountNumber + " | " + type.getDisplayName() + " | " + amountString + "   |  " + this.getTime() + "   |  " + (this.isStatus() ? "Giao dịch thành công" : "Giao dịch không thành công"));
     }
 }

@@ -7,13 +7,10 @@ public class CustomerIdNotValidException extends Exception {
         super(message);
     }
 
-    public boolean isCustomerIdValid(String customerId) throws CustomerIdNotValidException {
+    public static void isCustomerIdValid(String customerId) throws CustomerIdNotValidException {
         if (customerId.length() != 12 || !User.isFirstThreeDigitsValid(customerId)
                 || customerId.matches(".*[a-zA-Z].*")) {
-            throw new CustomerIdNotValidException("CCCD không hợp lệ");
+            throw new CustomerIdNotValidException("CCCD không hợp lệ.");
         }
-
-        return true;
     }
-
 }

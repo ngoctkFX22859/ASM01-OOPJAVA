@@ -2,6 +2,7 @@ package vn.funix.FX22859.java.Asm02;
 
 import vn.funix.FX22859.java.Asm03.models.Transaction;
 import vn.funix.FX22859.java.Asm03.models.TransactionType;
+import vn.funix.FX22859.java.Asm04.dao.CustomerDao;
 import vn.funix.FX22859.java.Asm04.dao.TransactionDao;
 
 import java.io.IOException;
@@ -12,6 +13,7 @@ import java.util.List;
 
 public class Account implements Serializable {
 
+    private static final long serialVersionUID = 6529685098267757690L;
     protected String accountNumber;
     protected double balance;
     private List<Transaction> transactions;
@@ -46,8 +48,16 @@ public class Account implements Serializable {
         return balance;
     }
 
+    public List<Transaction> getTransactions() {
+        return transactions;
+    }
+
     public void addTransaction(String accountNumber, double amount, boolean status) {
         this.transactions.add(new Transaction(accountNumber, amount, status));
+    }
+
+    public void setCustomerId(String customerId) {
+        this.customerId = customerId;
     }
 
     public void setBalance(double balance) {
@@ -75,7 +85,13 @@ public class Account implements Serializable {
 
     public void createTransaction(double amount, boolean status, TransactionType type) throws IOException {
         Transaction trans = new Transaction(accountNumber, amount, true, type);
-        transactions.add(trans);
-        TransactionDao.save(transactions);
+        TransactionDao.addTransaction(trans);
+    }
+
+    public void displayTransactionsList() {
+        List<Transaction> listTrans = TransactionDao.getTransactions(accountNumber);
+        for (Transaction trans : listTrans) {
+            trans.displayTransaction();
+        }
     }
 }
