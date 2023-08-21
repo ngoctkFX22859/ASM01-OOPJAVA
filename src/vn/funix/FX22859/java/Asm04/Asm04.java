@@ -15,12 +15,8 @@ import java.util.Scanner;
 
 public class Asm04 {
     private static final Integer EXIT_COMMAND_CODE = 0;
-    private static final Integer EXIT_ERROR_CODE = -1;
     public static final Scanner scanner = new Scanner(System.in);
     private static final DigitalBank activeBank = new DigitalBank();
-    private static final double LOAN_ACCOUNT_MAX_BALANCE = 100000000;
-    private static final String CUSTOMER_ID = "077123456789";
-    private static final String CUSTOMER_NAME = "ESTHER";
     public static String AUTHOR = "FX22859";
     public static String VERSION = "V4.0.0";
 
@@ -55,7 +51,7 @@ public class Asm04 {
                     menu();
                 }
                 if (input == 2) {
-                    inputCustomer();
+                    inputCustomers();
                     menu();
                 }
                 if (input == 3) {
@@ -76,12 +72,12 @@ public class Asm04 {
                 }
                 if (input == 0) {
                     System.out.println("Exit!");
-                    System.exit(EXIT_COMMAND_CODE); // Kết thúc chương trình
+                    System.exit(EXIT_COMMAND_CODE);
                 }
                 System.out.println("Số bạn nhập không đúng, vui lòng nhập lại");
             }
         } catch (Exception e) {
-            e.printStackTrace(); //phương thức printStackTrace() sẽ in ra thông báo lỗi vào console.
+            e.printStackTrace();
             sc.next();
             System.out.println("Lỗi nhập liệu hoặc số bạn nhập không hợp lệ. Vui lòng nhập lại.");
         }
@@ -93,12 +89,12 @@ public class Asm04 {
     }
 
     //CN2: NHẬP DS KH
-    public static void inputCustomer() {
+    public static void inputCustomers() {
         System.out.println("Nhập đường dẫn đến tệp: ");
         String fileName = scanner.nextLine();
         readFile(fileName);
         try {
-            CustomerDao.save(activeBank.getCustomers());
+            activeBank.inputCustomers();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -131,12 +127,12 @@ public class Asm04 {
             System.out.println(e.getMessage());
             addSavingsAccount();
         }
-        Customer customer = CustomerDao.getCustomer(customerId);
+        Customer customer = activeBank.getCustomer(customerId);
         while (customer == null) {
             System.out.println("Số CCCD không tồn tại.");
             System.out.println("Vui lòng nhập lại CCCD: ");
             customerId = scanner.next();
-            customer = CustomerDao.getCustomer(customerId);
+            customer = activeBank.getCustomer(customerId);
         }
 
         System.out.println("Nhập số TK gồm 6 chữ số: ");
@@ -144,12 +140,12 @@ public class Asm04 {
         while (!activeBank.checkAccNumber(accNumber)) {
             accNumber = scanner.next();
         }
-        Account isExistedAccount = AccountDao.getAccount(accNumber);
+        Account isExistedAccount = activeBank.getAccountBy(accNumber);
         while (isExistedAccount != null) {
             System.out.println("Số tk đã tồn tại.");
             System.out.println("Vui lòng nhập lại số tk: ");
             accNumber = scanner.next();
-            isExistedAccount = AccountDao.getAccount(accNumber);
+            isExistedAccount = activeBank.getAccountBy(accNumber);
         }
 
         System.out.println("Nhập số dư: ");
@@ -203,15 +199,15 @@ public class Asm04 {
             System.out.println(e.getMessage());
             transactionHistory();
         }
-        Customer customer = CustomerDao.getCustomer(customerId);
+        Customer customer = activeBank.getCustomer(customerId);
         while (customer == null) {
             System.out.println("Số CCCD không tồn tại.");
             System.out.println("Vui lòng nhập lại CCCD: ");
             customerId = scanner.next();
-            customer = CustomerDao.getCustomer(customerId);
+            customer = activeBank.getCustomer(customerId);
         }
         activeBank.showCustomer(customer);
-        customer.showTransactions();
+        activeBank.showTransactions(customer);
     }
 
 }

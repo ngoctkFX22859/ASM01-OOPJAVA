@@ -1,5 +1,8 @@
 package vn.funix.FX22859.java.Asm02;
 
+import vn.funix.FX22859.java.Asm04.dao.CustomerDao;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -48,4 +51,7 @@ public class Bank {
                 });
     }
 
+    public void inputCustomers() throws IOException {
+        CustomerDao.save(getCustomers());
+    }
 }

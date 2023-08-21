@@ -109,6 +109,17 @@ public class DigitalBank extends Bank {
         customer.displayInformation();
     }
 
+    public void showTransactions(Customer customer) {
+        customer.showTransactions();
+    }
+
+    public Customer getCustomer(String customerId) {
+        return CustomerDao.getCustomer(customerId);
+    }
+
+    public Account getAccountBy(String accNumber) {
+        return AccountDao.getAccount(accNumber);
+    }
 
     public void transfers(Scanner scanner, String customerId) {
         Customer customer = CustomerDao.getCustomer(customerId);
@@ -127,6 +138,7 @@ public class DigitalBank extends Bank {
         boolean isValidSendAcc = checkAccNumber(sendAccountNumber);
         while (!isValidSendAcc) {
             sendAccountNumber = scanner.next();
+            isValidSendAcc = checkAccNumber(sendAccountNumber);
         }
 
         Account existedSendAccount = AccountDao.getAccountById(customerId, sendAccountNumber);
@@ -191,6 +203,7 @@ public class DigitalBank extends Bank {
         boolean isValidSendAcc = checkAccNumber(sendAccountNumber);
         while (!isValidSendAcc) {
             sendAccountNumber = scanner.next();
+            isValidSendAcc = checkAccNumber(sendAccountNumber);
         }
 
         Account existedSendAccount = AccountDao.getAccountById(customerId, sendAccountNumber);

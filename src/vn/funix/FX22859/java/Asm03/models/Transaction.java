@@ -66,6 +66,6 @@ public class Transaction implements Serializable {
                 break;
         }
         System.out.println(Utils.getDivider());
-        System.out.println("[GD]  " + accountNumber + " | " + type.getDisplayName() + " | " + amountString + "   |  " + this.getTime() + "   |  " + (this.isStatus() ? "Giao dịch thành công" : "Giao dịch không thành công"));
+        System.out.println("[GD]  " + accountNumber + " | " + type.getDisplayName() + " | " + amountString + "   |  " + this.getTime());
     }
 }

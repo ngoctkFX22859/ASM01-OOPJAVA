@@ -1,15 +1,11 @@
 package vn.funix.FX22859.java.Asm02;
 
-import vn.funix.FX22859.java.Asm03.models.SavingsAccount;
 import vn.funix.FX22859.java.Asm04.dao.AccountDao;
-import vn.funix.FX22859.java.Asm04.dao.CustomerDao;
 
-import java.io.Serializable;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import java.util.Scanner;
 import java.util.stream.Collectors;
 
 
@@ -80,7 +76,7 @@ public class Customer extends User {
 
     public void displayInformation() {
         String isPre = isPremium() ? "Premium" : "Normal";
-        System.out.println(getCustomerID() + "  " + getName() + "  " + isPre + "              " + getBalance());
+        System.out.println(getCustomerID() + "  " + getName() + "  " + isPre + "         " + getBalance());
 
         int index = 1;
         for (Account account : accounts) {

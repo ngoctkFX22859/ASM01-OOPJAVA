@@ -79,7 +79,7 @@ public class SavingsAccount extends Account implements Withdraw, ReportService, 
     public String toString() {
         DecimalFormat decimalFormat = new DecimalFormat("#,##0đ");
         String accountType = "SAVINGS";
-        return " " + accountNumber + "              " + accountType + "   " + decimalFormat.format(balance);
+        return " " + accountNumber + "                " + accountType + "         " + decimalFormat.format(balance);
     }
 
     @Override
